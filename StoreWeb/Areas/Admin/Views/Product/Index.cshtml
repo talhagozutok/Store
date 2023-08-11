@@ -1,0 +1,97 @@
+@model ProductListViewModel
+
+@{
+  @* Model.Pagination.ItemsPerPage = 10; *@
+}
+
+<div class="text-center">
+  <div class="display-6 my-3">Products</div>
+  @*
+  <div class="display-6 my-3">
+    <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="@await Component.InvokeAsync("
+      ProductSummary")">
+      Products
+    </span>
+  </div>
+  *@
+
+  <div class="d-flex justify-content-end my-3">
+    <a class="btn btn-outline-success" asp-action="Create">
+      <i class="fa fa-plus"></i>
+      Create
+    </a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    @await Component.InvokeAsync("CategoriesMenu")
+    @await Component.InvokeAsync("ProductFilterMenu")
+    <lastest-product number="5"></lastest-product>
+  </div>
+  <div class="col-md-9">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Image</th>
+          <th style="text-align: left;">Product Name</th>
+          <th style="text-align: left;">Showcase</th>
+          <th style="text-align: right;">Price</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var product in @Model.Products)
+        {
+        <tr>
+          <td>@product.ProductId</td>
+          <td>
+            <img class="border border-secondary rounded" width="50" height="50" src="@product.ImageUrl"
+              alt="@product.ProductName" asp-append-version="true" />
+          </td>
+          <td style="text-align: left;">@product.ProductName</td>
+          <td>
+            <span class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" checked="@product.ShowCase" disabled>
+            </span>
+          </td>
+          <td style="text-align: right;">
+            @product.Price.ToString("c", CultureExtensions.GetTurkishCultureInfo())
+          </td>
+          <td>
+            <div class="btn-group">
+              <a class="btn btn-outline-warning" asp-action="Update" asp-route-id="@product.ProductId"
+                data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit"
+                data-bs-custom-class="tooltip-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+              <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@product.ProductId"
+                data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete"
+                data-bs-custom-class="tooltip-danger">
+                <i class="fa fa-trash"></i>
+              </a>
+              <a class="btn btn-outline-info" asp-area="" asp-controller="Product" asp-action="Get"
+                asp-route-id="@product.ProductId" data-bs-toggle="tooltip" data-bs-placement="right"
+                data-bs-title="Details" data-bs-custom-class="tooltip-info">
+                <i class="fa fa-arrow-right"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="text-center">
+        <div
+          page-model="@Model?.Pagination"
+          page-action="Index"
+          page-classes-enabled="true"
+          page-class="btn"
+          page-class-normal="btn-outline-secondary"
+          page-class-selected="btn-primary"
+          class="btn-group">
+        </div>
+    </div>
+  </div>
+</div>

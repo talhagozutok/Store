@@ -1,0 +1,27 @@
+@{
+    ViewBag.Title = "404 Page Not Found! - StoreWeb";
+}
+
+<div class="container my-5">
+  <h5 class="display-5">
+    We could not found the page you are looking for,<br> but unique opportunities are here!
+  </h5>
+
+  <div class="lead">
+    The page may have been removed or changed. Want to search for something
+    else?
+  </div>
+
+  <div class="text-center">
+    <a class="btn btn-outline-primary my-3" asp-controller="Home" asp-action="Index">
+      Go to homepage
+    </a>
+  </div>
+
+  <h6 class="display-6 mt-4">
+    Browse our products
+  </h6>
+
+  @await Component.InvokeAsync("Showcase", new{viewName = "MiniCart"})
+
+</div>

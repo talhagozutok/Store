@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        @(
+            // This will first return ViewData["Title"]
+            // if it is null
+            // then it will return the action name
+            // if it is null
+            // then it will return the controller name
+            // if it is null too
+            // then it will return "Empty title".
+            ViewData["Title"]
+             ?? ViewContext.RouteData.Values["action"]
+             ?? this.ViewContext.RouteData.Values["controller"]
+             ?? "Empty title"
+        )
+    </title>
+    <link rel="icon" href="@Url.Content("~/html/favicon.ico")"/>
+
+    <environment include="Development">
+        <link rel="stylesheet" asp-append-version="true" href="~/lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" asp-append-version="true" href="~/lib/font-awesome/css/all.min.css">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"  integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg==" crossorigin="anonymous" referrerpolicy="no-referrer"
+        asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+        asp-fallback-test-class="sr-only"
+        asp-fallback-test-property="position"
+        asp-fallback-test-value="absolute"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"
+        asp-fallback-href="~/lib/font-awesome/css/all.min.css"
+        asp-fallback-test-class="fab"
+        asp-fallback-test-property="font-style"
+        asp-fallback-test-value="normal"/>
+    </environment>
+
+    <link rel="stylesheet" asp-append-version="true" href="~/css/site.css">
+    <link rel="stylesheet" asp-append-version="true" href="~/StoreWeb.styles.css">
+</head>
+<body>
+    <header>
+        <partial name="_Navbar"/>
+        @RenderSection("Header", required: false)
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="footer">
+        <partial name="_Footer">
+        @RenderSection("Footer", required: false)
+    </footer>
+
+    <environment include="Development">
+        <script asp-append-version="true" src="~/lib/jquery/jquery.min.js"></script>
+        <script asp-append-version="true" src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script asp-append-version="true" src="~/lib/font-awesome/js/all.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/jquery.min.js"
+                integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/js/bootstrap.bundle.min.js"
+                integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+                asp-fallback-src="~/lib/font-awesome/js/all.min.js"
+                integrity="sha512-fD9DI5bZwQxOi7MhYWnnNPlvXdp/2Pj3XSTRrFs5FQa4mizyGLnJcN6tuvUS6LbmgN1ut+XGSABKvjN0H6Aoow==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+    </environment>
+    <script asp-append-version="true" src="~/js/site.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

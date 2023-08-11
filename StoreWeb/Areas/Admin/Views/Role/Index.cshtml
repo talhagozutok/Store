@@ -1,0 +1,16 @@
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<div class="text-center">
+  <div class="display-6 my-3">Roles</div>
+</div>
+
+<ul class="list-group">
+    @foreach (var role in Model)
+    {
+        <li class="list-group-item">@role.Name</li>
+    }
+</ul>

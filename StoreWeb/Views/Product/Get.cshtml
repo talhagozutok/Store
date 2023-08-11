@@ -1,0 +1,44 @@
+@model Product
+
+@{
+  ViewData["Title"] = $"{@Model.ProductName} details";
+}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-center my-3">
+      <h6 class="display-6">
+        @Model.ProductName
+      </h6>
+      <img src="@Model.ImageUrl" class="img-fluid shadow rounded-3 p-5 my-3">
+      <p class="lead my-3">
+        @Model.Price.ToString("c")
+      </p>
+      <div class="btn-group">
+      <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">
+        <i class="fa-solid fa-house"></i>
+        Home
+      </a>
+      <form id="@Model.ProductId" method="post" asp-page="/Cart">
+        <input type="hidden" asp-for="ProductId">
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
+        <button type="submit" class="btn btn-outline-secondary rounded-0">
+          <i class="fa fa-cart-plus fa-xs"></i>
+          Add to cart
+        </button>
+      </form>
+      <a class="btn btn-outline-secondary" asp-controller="Product" asp-action="Index">
+        <i class="fa-solid fa-arrow-left fa-xs"></i>
+        Products
+      </a>
+    </div>
+    </div>
+  </div>
+</div>
+
+@*
+@section Header
+{
+  <div>Header for only get.</div>
+}
+*@

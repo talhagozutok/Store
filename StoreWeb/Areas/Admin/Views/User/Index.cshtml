@@ -1,0 +1,55 @@
+@model IEnumerable<IdentityUser>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="text-center">
+  <div class="display-6 my-3">Users</div>
+  <div class="d-flex justify-content-end my-3">
+    <a class="btn btn-outline-success" asp-action="Create">
+        <i class="fa fa-plus"></i>
+        Create
+    </a>
+  </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Roles</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td user-id="@user.Id" user-role=""></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-warning"
+                            asp-action="Update" asp-route-id="@user.UserName"
+                            data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit" data-bs-custom-class="tooltip-warning">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a class="btn btn-sm btn-outline-info"
+                            asp-action="ChangePassword" asp-route-id="@user.Id"
+                            data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Change password" data-bs-custom-class="tooltip-info">
+                            <i class="fa-solid fa-key"></i>
+                        </a>
+                        <a class="btn btn-sm btn-outline-danger"
+                        asp-action="Delete" asp-route-id="@user.Id"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Delete" data-bs-custom-class="tooltip-danger">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

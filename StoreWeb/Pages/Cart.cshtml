@@ -1,0 +1,31 @@
+@page
+@model CartModel
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<div>
+    <div class="display-6 my-3">
+       <i class="fa-solid fa-cart-shopping fa-sm"></i> Cart
+    </div>
+
+    @{
+        if(Model.Cart.Items.Count == 0)
+        {
+            <div class="text-center my-3">
+                <div class="display-6">
+                    <strong>Your cart is currently empty</strong>
+                </div>
+                <p>To fill your basket from the world of StoreWeb full of opportunities,<br>
+                You can start to review the following products.
+                </p>
+                @await Component.InvokeAsync("Showcase")
+            </div>
+        }
+        else
+        {
+            <partial name="_CartTable"/>
+        }
+    }
+</div>

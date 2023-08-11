@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoreWeb - @this.ViewContext.RouteData.Values["controller"]?.ToString()</title>
+    <link asp-append-version="true" rel="icon" href="@Url.Content("~/html/favicon.ico")"/>
+    <link asp-append-version="true" rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    <header>
+        <partial name="_Navbar"/>
+        @RenderSection("Header", required: false)
+    </header>
+    <div class="container">
+        <div class="">
+            <partial name="_Notification"/>
+        </div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        @RenderSection("Footer", required: false)
+    </footer>
+
+    <script asp-append-version="true" src="~/lib/jquery/jquery.min.js"></script>
+    <script asp-append-version="true" src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script asp-append-version="true" src="~/lib/font-awesome/js/all.min.js"></script>
+    <script asp-append-version="true" src="~/js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

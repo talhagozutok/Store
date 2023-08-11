@@ -1,0 +1,74 @@
+@model ProductDtoForUpdate
+
+<div class="text-center">
+  <div class="display-6 my-3">Update product</div>
+</div>
+
+<form method="post" asp-action="Update" enctype="multipart/form-data">
+  <div class="text-danger" asp-validation-summary="All"></div>
+
+  <input type="hidden" asp-for="ProductId" />
+
+  <div class="form-floating my-3">
+    <select
+      class="form-control"
+      asp-items="@ViewBag.Categories"
+      asp-for="CategoryId"
+    ></select>
+    <label asp-for="CategoryId">Category name:</label>
+  </div>
+
+  <div class="form-floating my-3">
+    <input asp-for="ProductName" class="form-control" />
+    <label asp-for="ProductName">Product name: </label>
+  </div>
+
+  <div class="form-floating my-3">
+    <textarea
+      asp-for="Summary"
+      class="form-control"
+      style="resize: vertical; max-height: 200px;"
+    ></textarea>
+    <label for="Summary">Product summary: </label>
+  </div>
+
+  <div class="form-floating my-3">
+    <input asp-for="Price" class="form-control" />
+    <label asp-for="Price">Price: </label>
+  </div>
+
+  <div class="form-group my-3">
+    <div class="input-group custom-file-button">
+      <label class="input-group-text" asp-for="ImageUrl"
+        >Image:&nbsp;
+        <img
+          class="rounded-4 shadow"
+          width="150"
+          height="150"
+          src="@Model.ImageUrl"
+        />
+      </label>
+      <input asp-for="ImageUrl" name="file" type="file" class="form-control"  />
+    </div>
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" asp-for="ShowCase">
+    <label asp-for="ShowCase">
+      Show in showcase
+    </label>
+  </div>
+
+  <div class="form-group my-3">
+    <div class="btn-group">
+      <button class="btn btn-primary" type="submit">
+        <i class="fa fa-save"></i>
+        Update
+      </button>
+      <a class="btn btn-outline-primary" asp-action="Index">
+        <i class="fa fa-list"></i>
+        Products
+      </a>
+    </div>
+  </div>
+</form>

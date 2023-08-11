@@ -1,0 +1,28 @@
+@model IEnumerable<Product>
+
+<div class="mt-5 text-center border-bottom">
+    <h6 class="display-6">Showcase products</h6>
+</div>
+
+<div class="row">
+    @foreach (var prd in Model)
+    {
+        <div class="col-md-3 my-3">
+            <div class="card" style="width: 18rem;">
+                @* <img class="card-img-top" src="@prd.ImageUrl" alt="Card image cap"> *@
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-action="Update" asp-controller="Product" asp-route-id="@prd.ProductId"
+                            class="text-decoration-none"
+                            data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Edit"
+                            data-bs-custom-class="tooltip-info">
+                            <i class="fa fa-edit"></i>
+                            @prd.ProductName
+                        </a>
+                    </h5>
+                    <p class="card-text">@prd.Price.ToString("c")</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
