@@ -32,7 +32,7 @@ public class Cart
         => Items.RemoveAll(i => i.Product.ProductId.Equals(product.ProductId));
 
     public decimal ComputeTotalValue()
-        => Items.Sum(e => e.Product.Price * e.Quantity);
+        => Items.Sum(e => e.SubTotal);
 
     public virtual void Clear() => Items.Clear();
 }
